@@ -13,13 +13,13 @@ class DBConnection {
 
     public function __construct() {
         // Check if the JAWSDB_URL environment variable is set (Heroku environment)
-        if (getenv('JAWSDB_URL')) {
-            $url = parse_url(getenv('mysql://ob2izbsa8yx1yh8f:bsfxkigjebobhcbb@r98du2bxwqkq3shg.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/donadzl6ia5ws7if'));
+        if (getenv('mysql://ob2izbsa8yx1yh8f:bsfxkigjebobhcbb@r98du2bxwqkq3shg.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/donadzl6ia5ws7if')) {
+            $url = parse_url(getenv('JAWSDB_URL'));
 
             $this->host = $url['host'];
             $this->username = $url['user'];
             $this->password = $url['pass'];
-            $this->database = substr($url['path'], 1);  // Remove the leading slash
+            $this->database = ltrim($url['path'], '/'); // Remove the leading slash
             $this->port = isset($url['port']) ? $url['port'] : 3306;
         } else {
             // If JAWSDB_URL is not set, use the constants from initialize.php
