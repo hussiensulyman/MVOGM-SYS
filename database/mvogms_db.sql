@@ -259,7 +259,6 @@ CREATE TABLE `system_info` (
   `meta_field` text NOT NULL,
   `meta_value` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 --
 -- Dumping data for table `system_info`
 --
