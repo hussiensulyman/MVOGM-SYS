@@ -1,5 +1,14 @@
-class DBConnection {
+<?php
+if (!defined('DB_SERVER')) {
+    require_once("../initialize.php");
+}
 
+class DBConnection {
+    private $host;
+    private $username;
+    private $password;
+    private $database;
+    private $port;
     public $conn;
 
     public function __construct() {
@@ -12,6 +21,13 @@ class DBConnection {
             $this->password = $url['pass'];
             $this->database = substr($url['path'], 1);  // Remove the leading slash
             $this->port = isset($url['port']) ? $url['port'] : 3306;
+        } else {
+            // If JAWSDB_URL is not set, use the constants from initialize.php
+            $this->host = DB_SERVER;
+            $this->username = DB_USERNAME;
+            $this->password = DB_PASSWORD;
+            $this->database = DB_NAME;
+            $this->port = 3306; // Default MySQL port
         }
 
         $this->conn = new mysqli($this->host, $this->username, $this->password, $this->database, $this->port);
@@ -29,3 +45,4 @@ class DBConnection {
         $this->conn->close();
     }
 }
+?>
