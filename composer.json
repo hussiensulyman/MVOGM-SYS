@@ -1,0 +1,18 @@
+{
+    "name": "hp/mvogms",
+    "description": "DB Project",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hussein-S0liman",
+            "email": "husseinsolimanofficial@hotmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^8.2.12",
+        "ext-mysqli": "*",
+        "stripe/stripe-php": "^13.7"
+}
+}
