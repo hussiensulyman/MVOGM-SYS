@@ -1,19 +1,19 @@
-<?php
-if(!defined('DB_SERVER')){
-    require_once("../initialize.php");
-}
-<?php
 class DBConnection {
-
-    private $host = 'r98du2bxwqkq3shg.cbetxkdyhwsb.us-east-1.rds.amazonaws.com';
-    private $username = 'ob2izbsa8yx1yh8f';
-    private $password = 'bsfxkigjebobhcbb';
-    private $database = 'donadzl6ia5ws7if';
-    private $port = 3306;  // Default MySQL port
 
     public $conn;
 
     public function __construct() {
+        // Check if the JAWSDB_URL environment variable is set (Heroku environment)
+        if (getenv('JAWSDB_URL')) {
+            $url = parse_url(getenv('mysql://ob2izbsa8yx1yh8f:bsfxkigjebobhcbb@r98du2bxwqkq3shg.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/donadzl6ia5ws7if'));
+
+            $this->host = $url['host'];
+            $this->username = $url['user'];
+            $this->password = $url['pass'];
+            $this->database = substr($url['path'], 1);  // Remove the leading slash
+            $this->port = isset($url['port']) ? $url['port'] : 3306;
+        }
+
         $this->conn = new mysqli($this->host, $this->username, $this->password, $this->database, $this->port);
 
         if ($this->conn->connect_error) {
@@ -29,4 +29,3 @@ class DBConnection {
         $this->conn->close();
     }
 }
-?>
