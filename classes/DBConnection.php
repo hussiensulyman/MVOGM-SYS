@@ -12,25 +12,18 @@ class DBConnection {
     public $conn;
 
     public function __construct() {
-        // Check if the JAWSDB_URL environment variable is set (Heroku environment)
-        if (getenv('mysql://ob2izbsa8yx1yh8f:bsfxkigjebobhcbb@r98du2bxwqkq3shg.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/donadzl6ia5ws7if')) {
-            $url = parse_url(getenv('JAWSDB_URL'));
+        // Set your specific MySQL URL here
+        $jawsdb_url = 'mysql://ob2izbsa8yx1yh8f:bsfxkigjebobhcbb@r98du2bxwqkq3shg.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/donadzl6ia5ws7if';
 
-            $this->host = $url['host'];
-            $this->username = $url['user'];
-            $this->password = $url['pass'];
-            $this->database = ltrim($url['path'], '/'); // Remove the leading slash
-            $this->port = isset($url['port']) ? $url['port'] : 3306;
-        } else {
-            // If JAWSDB_URL is not set, use the constants from initialize.php
-            $this->host = DB_SERVER;
-            $this->username = DB_USERNAME;
-            $this->password = DB_PASSWORD;
-            $this->database = DB_NAME;
-            $this->port = 3306; // Default MySQL port
-        }
+        $url = parse_url($jawsdb_url);
 
-         $this->conn = new mysqli($this->host, $this->username, $this->password, $this->database, $this->port);
+        $this->host = $url['host'];
+        $this->username = $url['user'];
+        $this->password = $url['pass'];
+        $this->database = ltrim($url['path'], '/');
+        $this->port = isset($url['port']) ? $url['port'] : 3306;
+
+        $this->conn = new mysqli($this->host, $this->username, $this->password, $this->database, $this->port);
 
         if ($this->conn->connect_error) {
             error_log("Connection failed: " . $this->conn->connect_error);
