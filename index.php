@@ -1,4 +1,6 @@
-<?php require_once('./config.php'); ?>
+<?php require_once('./config.php');
+require('vendor/autoload.php');
+?>
  <!DOCTYPE html>
 <html lang="en" class="" style="height: auto;">
 <style>
