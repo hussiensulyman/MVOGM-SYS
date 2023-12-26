@@ -30,13 +30,10 @@ class DBConnection {
             $this->port = 3306; // Default MySQL port
         }
 
-        $this->conn = new mysqli($this->host, $this->username, $this->password, $this->database, $this->port);
+         $this->conn = new mysqli($this->host, $this->username, $this->password, $this->database, $this->port);
 
         if ($this->conn->connect_error) {
-            // In a production environment, you should log this to a file instead and not output it.
             error_log("Connection failed: " . $this->conn->connect_error);
-            // For development, you could uncomment the next line to get the error message
-            // echo "Connection failed: " . $this->conn->connect_error;
             die("Connection failed. Please check the logs.");
         }
     }
