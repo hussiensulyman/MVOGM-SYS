@@ -13,6 +13,7 @@
     "require": {
         "php": "^8.2.12",
         "ext-mysqli": "*",
-        "stripe/stripe-php": "^13.7"
+        "stripe/stripe-php": "^13.7",
+        "monolog/monolog": "^3.0"
 }
 }
